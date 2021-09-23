@@ -7,12 +7,12 @@ import Buttonshow from "../components/Buttonshow";
 
 const moreProviders = [
   {
-    id: "prov4",
+    id: "4",
     title: "TELE 2",
     url: "./tele2.png",
   },
   {
-    id: "prov5",
+    id: "5",
     title: "Tinkoff Mobile",
     url: "./tinkoff.png",
   },
@@ -20,17 +20,17 @@ const moreProviders = [
 
 const providers = [
   {
-    id: "prov1",
+    id: "1",
     title: "MegaFon",
     url: "./megafon.png",
   },
   {
-    id: "prov2",
+    id: "2",
     title: "Beeline",
     url: "./beeline.png",
   },
   {
-    id: "prov3",
+    id: "3",
     title: "MTS",
     url: "./MTS.png",
   },
