@@ -38,9 +38,16 @@ const providers = [
 
 export default function Home() {
   const [providerState, setProviders] = useState(providers);
+  const [showContent, setShowContent] = useState(false);
 
   const showMore = (event) => {
-    setProviders([...providers, ...moreProviders]);
+    if (!showContent) {
+      setProviders([...providers, ...moreProviders]);
+      setShowContent(true);
+    } else {
+      setProviders([...providers])
+      setShowContent(false);
+    }
   };
 
   return (
@@ -50,7 +57,9 @@ export default function Home() {
       </Head>
       <h1>Choose the provider to pay</h1>
       <ProvidersList providers={providerState} />
-      <Buttonshow onClick={showMore}>Show me more</Buttonshow>
+      <Buttonshow onClick={showMore}>
+      {!showContent? 'Show me more' : 'Hide these'}
+      </Buttonshow>
     </>
   );
 }
