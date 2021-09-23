@@ -1,0 +1,49 @@
+.providerElement {
+    width: 20rem;
+    height: auto;
+    padding: 0.5rem 1rem;
+    background-color: #AFCFEA;
+    border-radius: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.providerElement img {
+    width: 100%;
+}
+
+.providerElement h2 {
+    margin-bottom: 1.5rem;
+    padding: 0;
+    color: #F2F8FD;
+    font-size: 2rem;
+}
+
+.providerElement main {
+    flex-grow: 1;
+}
+
+.btn_holder {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.btn_holder button {
+    border: 0;
+    line-height: 2;
+    width: 80%;
+    padding: 0 1rem;
+    font-size: 1rem;
+    text-align: center;
+    background-color: #51EAFF;
+    border-radius: 0.5rem;
+}
+
+.btn_holder button:hover {
+    background-color: #D7FFFE;
+    cursor: pointer;
+}
+

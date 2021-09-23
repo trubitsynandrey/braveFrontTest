@@ -1,0 +1,14 @@
+#showMe {
+    font: inherit;
+    background: #7AB1FF;
+    border: none;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+  }
+
+  
+  #showMe:hover,
+  #showMe:active {
+    background: #51EAFF;
+  }
