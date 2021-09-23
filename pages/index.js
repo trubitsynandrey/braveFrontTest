@@ -55,7 +55,7 @@ export default function Home() {
       <Head>
         <title>Mobile Providers</title>
       </Head>
-      <h1>Choose the provider to pay</h1>
+      <h1>Choose the provider</h1>
       <ProvidersList providers={providerState} />
       <Buttonshow onClick={showMore}>
       {!showContent? 'Show me more' : 'Hide these'}
