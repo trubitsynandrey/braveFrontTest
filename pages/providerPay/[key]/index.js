@@ -1,9 +1,12 @@
-const providerPay = () => {
+
+import ProviderPay from "../../../components/ProviderPay";
+
+const index = () => {
     return (
-        <div>
-            This is payment page
-        </div>
+        <>
+           <ProviderPay /> 
+        </>
     )
 }
 
-export default providerPay
+export default index

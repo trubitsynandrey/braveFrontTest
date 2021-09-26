@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "./Provider.module.css";
 
 const Provider = (props) => {
+
   return (
     <li className={styles.providerElement}>
       <main>
@@ -10,7 +11,7 @@ const Provider = (props) => {
       </main>
       <div className={styles.btn_holder}>
         <Link href="/providerPay/[key]" as={`/providerPay/${props.id}`}>
-          <button>Pay Here</button>
+          <button>Proceed to payment</button>
         </Link>
       </div>
     </li>
