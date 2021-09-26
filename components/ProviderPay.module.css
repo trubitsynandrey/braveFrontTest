@@ -29,7 +29,7 @@
     display: block;
 }
 
-.payForm input {
+.payForm input, .Marked {
     padding: 0.5rem;
     border-radius: 6px;
     border: 1px solid #ccc;

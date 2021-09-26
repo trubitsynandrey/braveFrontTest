@@ -4,6 +4,7 @@ import styles from "./ProviderPay.module.css";
 import Layout from "./Layout";
 import Link from "next/link";
 import ErrorModal from "./ErrorModal";
+import MaskedInput from "react-text-mask";
 
 const ProviderPay = () => {
   const [enteredNumber, setEnteredNumber] = useState("");
@@ -75,8 +76,17 @@ const ProviderPay = () => {
           <div className={styles.payForm}>
             <div className={styles.payForm}>
               <label>Phone number</label>
-              <input
+              {/* <input
                 type="tel"
+                placeholder="+7(XXX)XXX-XX-XX"
+                value={enteredNumber}
+                onChange={numberChangeHadler}
+              /> */}
+              <MaskedInput
+                mask={[/[1-9]/," ", '(', /\d/,/\d/,/\d/, ')', " ", /\d/,/\d/,/\d/,"-", /\d/,/\d/, "-", /\d/,/\d/]}
+                className = {styles.Marked}
+                type="tel"
+                placeholder="+7(XXX)XXX-XX-XX"
                 value={enteredNumber}
                 onChange={numberChangeHadler}
               />
@@ -86,6 +96,7 @@ const ProviderPay = () => {
               <input
                 min='1'
                 max='1000'
+                placeholder="1-1000 RUB"
                 type="number"
                 value={enteredAmount}
                 onChange={amountChangeHadler}
