@@ -3,16 +3,30 @@ import { useState } from "react";
 import styles from "./ProviderPay.module.css";
 import Layout from "./Layout";
 import Link from "next/link";
+import ErrorModal from "./ErrorModal";
 
 const ProviderPay = () => {
   const [enteredNumber, setEnteredNumber] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
+  const [error, setError] = useState("");
+
   const numberChangeHadler = (event) => {
       setEnteredNumber(event.target.value);
   }
   const amountChangeHadler = (event) => {
     setEnteredAmount(event.target.value);
   } 
+
+  const errorHandler = () => {
+      setError(null);
+  }
+
+  const submitHandler = (event) => {
+      event.preventDefault();
+
+      setEnteredNumber('');
+      setEnteredAmount('');
+  }
 
   const data = [
     {
@@ -47,15 +61,22 @@ const ProviderPay = () => {
   const provider = data.find((item) => item.id == key);
   return (
     <>
+      {error && (
+          <ErrorModal
+            title={"Errror"}
+            message={"Be warned"}
+            onConfirm={errorHandler}
+           />
+      )}
       <main className={styles.payWindow}>
         <h2>{provider.title}</h2>
         <img src={provider.url} alt={provider.title} />
-        <form>
+        <form onSubmit={submitHandler}>
           <div className={styles.payForm}>
             <div className={styles.payForm}>
               <label>Phone number</label>
               <input
-                type="number"
+                type="tel"
                 value={enteredNumber}
                 onChange={numberChangeHadler}
               />
