@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "./ProviderPay.module.css";
-import Layout from "./Layout";
 import Link from "next/link";
 import ErrorModal from "./ErrorModal";
 import MaskedInput from "react-text-mask";
@@ -24,7 +23,9 @@ const ProviderPay = () => {
 
   const submitHandler = (event) => {
       event.preventDefault();
+      if (enteredNumber.length == 17 && enteredAmount <= 1000) {
 
+      }
       setEnteredNumber('');
       setEnteredAmount('');
   }

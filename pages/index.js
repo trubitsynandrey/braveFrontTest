@@ -1,7 +1,7 @@
 import { useState } from "react";
+import styled from "styled-components";
 
 import Head from "next/head";
-import Provider from "../components/Provider";
 import ProvidersList from "../components/ProvidersList";
 import Buttonshow from "../components/Buttonshow";
 
