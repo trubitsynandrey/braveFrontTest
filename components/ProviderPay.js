@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-// import styles from "./ProviderPay.module.css";
 import styled from "styled-components";
 import Link from "next/link";
 import ErrorModal from "./ErrorModal";

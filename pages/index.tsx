@@ -1,42 +1,19 @@
+import { GetStaticProps } from 'next';
 import { useState } from "react";
 import styled from "styled-components";
+import { Provider } from '../interfaces/providers';
+import { ProvidersData, ProvidersDataExtented } from '../utils/providers-data';
 
 import Head from "next/head";
 import ProvidersList from "../components/ProvidersList";
 import Buttonshow from "../components/Buttonshow";
 
-const moreProviders = [
-  {
-    id: "4",
-    title: "TELE 2",
-    url: "./tele2.png",
-  },
-  {
-    id: "5",
-    title: "Tinkoff Mobile",
-    url: "./tinkoff.png",
-  },
-];
+type Props = {
+  providers: Provider[],
+  moreProviders: Provider[],
+};
 
-const providers = [
-  {
-    id: "1",
-    title: "MegaFon",
-    url: "./megafon.png",
-  },
-  {
-    id: "2",
-    title: "Beeline",
-    url: "./beeline.png",
-  },
-  {
-    id: "3",
-    title: "MTS",
-    url: "./MTS.png",
-  },
-];
-
-export default function Home() {
+export default function Home({ providers, moreProviders }) {
   const [providerState, setProviders] = useState(providers);
   const [showContent, setShowContent] = useState(false);
 
@@ -62,4 +39,10 @@ export default function Home() {
       </Buttonshow>
     </>
   );
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const providers:  Provider[] = ProvidersData;
+  const moreProviders: Provider[] = ProvidersDataExtented;
+  return { props: { providers, moreProviders } }
 }
