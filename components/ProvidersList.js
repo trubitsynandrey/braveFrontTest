@@ -1,4 +1,3 @@
-import providerPay from "../pages/providerPay/[key]";
 import Provider from "./Provider";
 // import styles from "./ProvidersList.module.css";
 import styled from "styled-components";

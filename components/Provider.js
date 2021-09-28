@@ -59,7 +59,7 @@ const Provider = (props) => {
         <StyledImg src={props.url} alt={props.title} />
       </StyledMain>
       <ButtonDiv>
-        <Link href="/providerPay/[key]" as={`/providerPay/${props.id}`}>
+        <Link href="/providerPay/[id]" as={`/providerPay/${props.id}`}>
           <StyledButton>Proceed to payment</StyledButton>
         </Link>
       </ButtonDiv>

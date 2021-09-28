@@ -1,5 +1,5 @@
 
-import ProviderPay from "../../../components/ProviderPay";
+import ProviderPay from "./[id]";
 
 const index = () => {
     return (

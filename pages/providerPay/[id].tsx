@@ -1,9 +1,12 @@
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import ErrorModal from "./ErrorModal";
 import MaskedInput from "react-text-mask";
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { ProvidersDataAlles } from "../../utils/providers-data";
+import { Provider } from "../../interfaces/providers";
+
 
 const PayWindow = styled.main`
   width: 30rem;
@@ -72,7 +75,12 @@ const Button = styled.button`
   }
 `;
 
-const ProviderPay = () => {
+type Props = {
+  provider?: Provider
+  errors?: string
+}
+
+const ProviderPay = ({provider, errors}) => {
   const [enteredNumber, setEnteredNumber] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [error, setError] = useState("");
@@ -90,43 +98,43 @@ const ProviderPay = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    if (enteredNumber.length == 17 && enteredAmount <= 1000) {
-    }
+    // if (enteredNumber.length == 17 && enteredAmount <= 1000) {
+    // }
     setEnteredNumber("");
     setEnteredAmount("");
   };
 
-  const data = [
-    {
-      id: "1",
-      title: "MegaFon",
-      url: "../megafon.png",
-    },
-    {
-      id: "2",
-      title: "Beeline",
-      url: "../beeline.png",
-    },
-    {
-      id: "3",
-      title: "MTS",
-      url: "../MTS.png",
-    },
-    {
-      id: "4",
-      title: "TELE 2",
-      url: "../tele2.png",
-    },
-    {
-      id: "5",
-      title: "Tinkoff Mobile",
-      url: "../tinkoff.png",
-    },
-  ];
-  const router = useRouter();
+  // const data = [
+  //   {
+  //     id: "1",
+  //     title: "MegaFon",
+  //     url: "../megafon.png",
+  //   },
+  //   {
+  //     id: "2",
+  //     title: "Beeline",
+  //     url: "../beeline.png",
+  //   },
+  //   {
+  //     id: "3",
+  //     title: "MTS",
+  //     url: "../MTS.png",
+  //   },
+  //   {
+  //     id: "4",
+  //     title: "TELE 2",
+  //     url: "../tele2.png",
+  //   },
+  //   {
+  //     id: "5",
+  //     title: "Tinkoff Mobile",
+  //     url: "../tinkoff.png",
+  //   },
+  // ];
+  // const router = useRouter();
   //console.log(router);
-  const { key } = router.query;
-  const provider = data.find((item) => item.id == key);
+  // const { key } = router.query;
+  // const provider = data.find((item) => item.id == key);
   return (
     <>
       {/* {error && (
@@ -200,3 +208,22 @@ const ProviderPay = () => {
 };
 
 export default ProviderPay;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = ProvidersDataAlles.map((provider) => ({
+    params: { id: provider.id.toString() },
+  }))
+
+  return { paths, fallback: false }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  try {
+    const id = params?.id;
+    const provider = ProvidersDataAlles.find((item) => item.id === Number(id))
+    return { props: { provider } }
+  } catch (err) {
+    return { props: { errors: err.message } }
+  }
+}
+
