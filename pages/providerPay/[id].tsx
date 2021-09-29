@@ -108,12 +108,12 @@ const ProviderPay = ({ provider, errors }) => {
       if (Math.floor(Math.random() * 10) > 2) {
         setError({
           title: "Succes!",
-          message: "Thank You! Your payment was successful!",
+          message: "Thank You! Your payment was successful! Click button below to proceed to the main page.",
         });
       } else {
         setError({
           title: "Failed",
-          message: "Ohps, our server probably missed your request, let's try again!"
+          message: "Oohps, our server probably missed your request, let's try again!"
         });
       }
     } else {

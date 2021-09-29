@@ -1,5 +1,7 @@
 import classes from "./ErrorModal.module.css";
 import styled from "styled-components";
+import Link from "next/dist/client/link";
+import Buttonshow from "./Buttonshow";
 
 const BackDrop = styled.div`
   position: fixed;
@@ -10,7 +12,6 @@ const BackDrop = styled.div`
   z-index: 10;
   background: rgba(0, 0, 0, 0.75);
 `;
-
 
 const Modal = styled.div`
   position: fixed;
@@ -23,13 +24,12 @@ const Modal = styled.div`
     left: calc(50% - 20rem);
     width: 40rem;
   }
-`; 
-
-const ModalHeader = styled.header`
-background: #1EC9E8;
-padding: 1rem;
 `;
 
+const ModalHeader = styled.header`
+  background: #1ec9e8;
+  padding: 1rem;
+`;
 
 const Headerh2 = styled.h2`
   margin: 0;
@@ -38,32 +38,36 @@ const Headerh2 = styled.h2`
 
 const Content = styled.div`
   padding: 1rem;
-  background-color: #BDCCFF;
+  background-color: #bdccff;
 `;
 
 const Actions = styled.footer`
   padding: 1rem;
   display: flex;
   justify-content: flex-end;
-  background: #BDCCFF;
+  background: #bdccff;
 `;
-
-
 
 const ErrorModal = (props) => {
   return (
     <>
       <BackDrop onClick={props.onConfirm} />
       <Modal>
-      <ModalHeader>
-        <Headerh2>{props.title}</Headerh2>
-      </ModalHeader>
-      <Content>
-        <p>{props.message}</p>
-      </Content>
-      <Actions>
-        <button onClick={props.onConfirm}>Okay</button>
-      </Actions>
+        <ModalHeader>
+          <Headerh2>{props.title}</Headerh2>
+        </ModalHeader>
+        <Content>
+          <p>{props.message}</p>
+        </Content>
+        <Actions>
+          {props.title === "Succes!" ? (
+            <Link href="/">
+              <Buttonshow>Go home</Buttonshow>
+            </Link>
+          ) : (
+            <Buttonshow onClick={props.onConfirm}>Okay</Buttonshow>
+          )}
+        </Actions>
       </Modal>
     </>
   );
