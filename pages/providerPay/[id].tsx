@@ -3,10 +3,10 @@ import { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import MaskedInput from "react-text-mask";
-import { GetStaticProps, GetStaticPaths } from 'next';
+import { GetStaticProps, GetStaticPaths } from "next";
 import { ProvidersDataAlles } from "../../utils/providers-data";
 import { Provider } from "../../interfaces/providers";
-
+import ErrorModal from "../../components/ErrorModal";
 
 const PayWindow = styled.main`
   width: 30rem;
@@ -76,14 +76,19 @@ const Button = styled.button`
 `;
 
 type Props = {
-  provider?: Provider
-  errors?: string
-}
+  provider?: Provider;
+  errors?: string;
+};
 
-const ProviderPay = ({provider, errors}) => {
+type Error = {
+  title: string;
+  message: string;
+};
+
+const ProviderPay = ({ provider, errors }) => {
   const [enteredNumber, setEnteredNumber] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<Error>();
 
   const numberChangeHadler = (event) => {
     setEnteredNumber(event.target.value);
@@ -98,21 +103,33 @@ const ProviderPay = ({provider, errors}) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    // if (enteredNumber.length == 17 && enteredAmount <= 1000) {
-    // }
+    console.log(enteredNumber.length);
+    if (enteredNumber.match(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/)) {
+      if (Math.floor(Math.random() * 10) > 3) {
+        setError({
+          title: "Succes!",
+          message: "Thank You! Your payment was successful!",
+        });
+      }
+    } else {
+      setError({
+        title: "Failed",
+        message: "Try again, you wrote non-existing number, or just had a bad luck!",
+      });
+    }
     setEnteredNumber("");
     setEnteredAmount("");
   };
 
   return (
     <>
-      {/* {error && (
-          <ErrorModal
-            title={"Errror"}
-            message={"Be warned"}
-            onConfirm={errorHandler}
-           />
-      )} */}
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
       <PayWindow>
         <h2>{provider.title}</h2>
         <PayWindowImg src={provider.url} alt={provider.title} />
@@ -128,7 +145,7 @@ const ProviderPay = ({provider, errors}) => {
               /> */}
               <StyledMaskedInput
                 mask={[
-                  /[1-9]/,
+                  /(8|\+7)/,
                   " ",
                   "(",
                   /\d/,
@@ -147,14 +164,14 @@ const ProviderPay = ({provider, errors}) => {
                   /\d/,
                 ]}
                 type="tel"
-                placeholder="+7(XXX)XXX-XX-XX"
+                placeholder="8(XXX)XXX-XX-XX"
                 value={enteredNumber}
                 onChange={numberChangeHadler}
               />
             </PayForm>
             <PayForm>
-              <label>Amount</label>
-              <input
+              <PayFormLabel>Amount</PayFormLabel>
+              <PayFormInput
                 min="1"
                 max="1000"
                 placeholder="1-1000 RUB"
@@ -181,18 +198,17 @@ export default ProviderPay;
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = ProvidersDataAlles.map((provider) => ({
     params: { id: provider.id.toString() },
-  }))
+  }));
 
-  return { paths, fallback: false }
-}
+  return { paths, fallback: false };
+};
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const id = params?.id;
-    const provider = ProvidersDataAlles.find((item) => item.id === Number(id))
-    return { props: { provider } }
+    const provider = ProvidersDataAlles.find((item) => item.id === Number(id));
+    return { props: { provider } };
   } catch (err) {
-    return { props: { errors: err.message } }
+    return { props: { errors: err.message } };
   }
-}
-
+};
