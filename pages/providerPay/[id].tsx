@@ -105,16 +105,21 @@ const ProviderPay = ({ provider, errors }) => {
     event.preventDefault();
     console.log(enteredNumber.length);
     if (enteredNumber.match(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/)) {
-      if (Math.floor(Math.random() * 10) > 3) {
+      if (Math.floor(Math.random() * 10) > 2) {
         setError({
           title: "Succes!",
           message: "Thank You! Your payment was successful!",
+        });
+      } else {
+        setError({
+          title: "Failed",
+          message: "Ohps, our server probably missed your request, let's try again!"
         });
       }
     } else {
       setError({
         title: "Failed",
-        message: "Try again, you wrote non-existing number, or just had a bad luck!",
+        message: "Try again please, you wrote non-existing number."
       });
     }
     setEnteredNumber("");

@@ -48,6 +48,8 @@ const Actions = styled.footer`
   background: #BDCCFF;
 `;
 
+
+
 const ErrorModal = (props) => {
   return (
     <>
